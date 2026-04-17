@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS:LAB - Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <div class="brand-icon"><i class="fa-solid fa-star"></i></div>
+                    <h2>PS:<span>LAB</span></h2>
+                </div>
+                <div class="close-sidebar" id="closeSidebar"><i class="fa-solid fa-xmark"></i></div>
+            </div>
+            <div class="sidebar-section-label">MAIN MENU</div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>대시보드</span>
+                </a>
+                <a href="#" class="nav-item" data-page="students">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <span>학생 관리 (CRM)</span>
+                    <span class="nav-badge" id="badgeStudents">0</span>
+                </a>
+                <a href="#" class="nav-item" data-page="revenue">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>결제 및 매출</span>
+                </a>
+                <a href="#" class="nav-item" data-page="reports">
+                    <i class="fa-solid fa-file-contract"></i>
+                    <span>리포트 관리</span>
+                    <span class="nav-badge blue" id="badgeReports">0</span>
+                </a>
+            </nav>
+            <div class="sidebar-section-label">SYSTEM</div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item" data-page="settings">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>환경 설정</span>
+                </a>
+                <a href="../03_PSLAB_Homepage/PSLAB_Homepage_Deploy/index.html" class="nav-item" target="_blank">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span>홈페이지 보기</span>
+                </a>
+            </nav>
+            <div class="sidebar-phase">
+                <div class="phase-label">현재 성장 단계</div>
+                <div class="phase-value">Phase 1 – B2B 레퍼런스 확보</div>
+                <div class="phase-bar"><div class="phase-fill" style="width: 35%"></div></div>
+                <div class="phase-sub">목표까지 35% 달성</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
+                    <div class="search-bar">
+                        <i class="fa-solid fa-search"></i>
+                        <input type="text" id="globalSearch" placeholder="학생 이름, 학교 검색...">
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="notification-btn" id="notifBtn">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="badge">3</span>
+                        <!-- Notification Dropdown -->
+                        <div class="notif-dropdown" id="notifDropdown">
+                            <div class="notif-header">알림 <span>3 new</span></div>
+                            <div class="notif-item unread">
+                                <div class="notif-icon green"><i class="fa-solid fa-file-check"></i></div>
+                                <div class="notif-text">
+                                    <p><strong>박지윤</strong> 리포트 전달 완료</p>
+                                    <span>2026.04.14</span>
+                                </div>
+                            </div>
+                            <div class="notif-item unread">
+                                <div class="notif-icon green"><i class="fa-solid fa-file-check"></i></div>
+                                <div class="notif-text">
+                                    <p><strong>윤혜정</strong> 리포트 전달 완료</p>
+                                    <span>2026.04.15</span>
+                                </div>
+                            </div>
+                            <div class="notif-item unread">
+                                <div class="notif-icon blue"><i class="fa-solid fa-user-plus"></i></div>
+                                <div class="notif-text">
+                                    <p><strong>홍지민</strong> 리포트 전달 완료</p>
+                                    <span>2026.04.16</span>
+                                </div>
+                            </div>
+                            <div class="notif-footer">모든 알림 보기</div>
+                        </div>
+                    </div>
+                    <div class="header-divider"></div>
+                    <div class="admin-profile">
+                        <div class="avatar"><div class="avatar-initials">관</div></div>
+                        <div class="profile-info">
+                            <span class="name">최고 관리자</span>
+                            <span class="role">Founder · Admin</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down" style="color:var(--text-muted); font-size:0.7rem;"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ============ PAGE: DASHBOARD ============ -->
+            <div class="page-content active" id="page-dashboard">
+                <div class="dashboard-wrapper">
+                    <div class="page-title-row">
+                        <div>
+                            <h1>Dashboard Overview</h1>
+                            <p>PS:LAB의 핵심 경영 지표를 한눈에 확인하세요.</p>
+                        </div>
+                        <div class="title-actions">
+                            <span class="live-dot"></span>
+                            <span class="live-text">실시간</span>
+                            <button class="btn-outline"><i class="fa-solid fa-rotate"></i> 새로고침</button>
+                        </div>
+                    </div>
+
+                    <!-- KPI Cards -->
+                    <div class="kpi-cards">
+                        <div class="card kpi-card" style="--accent: #3b82f6;">
+                            <div class="kpi-top">
+                                <div class="kpi-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                                <span class="kpi-trend neutral" style="font-size:0.72rem;"><i class="fa-solid fa-clock"></i> 집계 예정</span>
+                            </div>
+                            <div class="kpi-value" style="font-size:1.1rem; color:var(--text-3);">데이터 없음</div>
+                            <div class="kpi-label">누적 매출 (미집계)</div>
+                            <div class="kpi-progress"><div class="kpi-fill" style="width: 0%;"></div></div>
+                        </div>
+                        <div class="card kpi-card" style="--accent: #8b5cf6;">
+                            <div class="kpi-top">
+                                <div class="kpi-icon" style="background: rgba(139,92,246,.15); color:#8b5cf6;"><i class="fa-solid fa-users"></i></div>
+                            </div>
+                            <div class="kpi-value" id="kpiTotalStudents" data-suffix="명">0명</div>
+                            <div class="kpi-label">전체 상담 학생</div>
+                            <div class="kpi-progress"><div class="kpi-fill" style="width:100%; background: linear-gradient(90deg,#8b5cf6,#a78bfa);"></div></div>
+                        </div>
+                        <div class="card kpi-card" style="--accent: #f59e0b;">
+                            <div class="kpi-top">
+                                <div class="kpi-icon" style="background: rgba(245,158,11,.15); color:#f59e0b;"><i class="fa-solid fa-spinner fa-spin"></i></div>
+                                <span class="kpi-trend neutral"><i class="fa-solid fa-minus"></i> 진행 중</span>
+                            </div>
+                            <div class="kpi-value" id="kpiProgress" data-suffix="명">0명</div>
+                            <div class="kpi-label">진행 중인 컨설팅</div>
+                            <div class="kpi-progress"><div class="kpi-fill" style="width:30%; background: linear-gradient(90deg,#f59e0b,#fcd34d);"></div></div>
+                        </div>
+                        <div class="card kpi-card" style="--accent: #10b981;">
+                            <div class="kpi-top">
+                                <div class="kpi-icon" style="background: rgba(16,185,129,.15); color:#10b981;"><i class="fa-solid fa-file-signature"></i></div>
+                            </div>
+                            <div class="kpi-value" id="kpiComplete" data-suffix="건">0건</div>
+                            <div class="kpi-label">발행 완료 리포트</div>
+                            <div class="kpi-progress"><div class="kpi-fill" style="width:100%; background: linear-gradient(90deg,#10b981,#34d399);"></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="charts-section">
+                        <div class="card chart-card span-2">
+                            <div class="card-header">
+                                <div>
+                                    <h3>매출 추이</h3>
+                                    <p class="card-sub">실제 매출 데이터 집계 전 — 추후 업데이트 예정</p>
+                                </div>
+                            </div>
+                            <div class="chart-container" style="height:260px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px;">
+                                <i class="fa-solid fa-chart-line" style="font-size:2.5rem; color:var(--text-3);"></i>
+                                <p style="color:var(--text-3); font-size:0.88rem;">매출 데이터 없음 — 정산 시스템 연동 후 표시됩니다</p>
+                            </div>
+                        </div>
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3>유입 경로</h3>
+                                    <p class="card-sub">집계 예정</p>
+                                </div>
+                            </div>
+                            <div class="chart-container" style="height:220px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
+                                <i class="fa-solid fa-chart-pie" style="font-size:2rem; color:var(--text-3);"></i>
+                                <p style="color:var(--text-3); font-size:0.82rem;">데이터 없음</p>
+                            </div>
+                        </div>
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3>학생 학년 분포</h3>
+                                    <p class="card-sub">현재 컨설팅 대상 기준</p>
+                                </div>
+                            </div>
+                            <div class="chart-container" style="height:220px;">
+                                <canvas id="gradeChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity + Progress -->
+                    <div class="bottom-section">
+                        <div class="card activity-card">
+                            <div class="card-header">
+                                <h3>최근 활동 타임라인</h3>
+                            </div>
+                            <div class="activity-list" id="activityList">
+                                <!-- JS 동적 렌더링 -->
+                            </div>
+                        </div>
+                        <div class="card roadmap-card">
+                            <div class="card-header">
+                                <h3>비즈니스 로드맵</h3>
+                            </div>
+                            <div class="roadmap-list">
+                                <div class="roadmap-item active">
+                                    <div class="roadmap-icon active"><i class="fa-solid fa-flag"></i></div>
+                                    <div class="roadmap-body">
+                                        <h4>Phase 1 · 현재</h4>
+                                        <p>B2B 레퍼런스 확보 - 송파구 학원 3~5곳 독점 납품 계약 체결</p>
+                                        <div class="roadmap-progress"><div style="width:35%"></div></div>
+                                    </div>
+                                </div>
+                                <div class="roadmap-item">
+                                    <div class="roadmap-icon"><i class="fa-solid fa-server"></i></div>
+                                    <div class="roadmap-body">
+                                        <h4>Phase 2 · 6개월 내</h4>
+                                        <p>IT 인프라 전환 - Headless CMS 기반 자동 퍼블리싱 파이프라인 구축</p>
+                                        <div class="roadmap-progress"><div style="width:0%"></div></div>
+                                    </div>
+                                </div>
+                                <div class="roadmap-item">
+                                    <div class="roadmap-icon"><i class="fa-solid fa-rocket"></i></div>
+                                    <div class="roadmap-body">
+                                        <h4>Phase 3 · 1년+</h4>
+                                        <p>에듀테크 SaaS 전환 - 전국 단위 확장 및 M&A 타겟화</p>
+                                        <div class="roadmap-progress"><div style="width:0%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ PAGE: STUDENTS ============ -->
+            <div class="page-content" id="page-students">
+                <div class="dashboard-wrapper">
+                    <div class="page-title-row">
+                        <div>
+                            <h1>학생 관리 (CRM)</h1>
+                            <p>등록된 모든 학생의 컨설팅 현황을 관리합니다.</p>
+                        </div>
+                        <div class="title-actions">
+                            <div class="search-bar inline">
+                                <i class="fa-solid fa-search"></i>
+                                <input type="text" id="tableSearch" placeholder="학생명, 학교로 검색...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card table-card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="studentTable">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>이름</th>
+                                        <th>학교 / 학년</th>
+                                        <th>지망 계열</th>
+                                        <th>리포트</th>
+                                        <th>상태</th>
+                                        <th>상세</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentTableBody">
+                                    <!-- JS로 동적 렌더링 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ PAGE: REVENUE ============ -->
+            <div class="page-content" id="page-revenue">
+                <div class="dashboard-wrapper">
+                    <div class="page-title-row">
+                        <div><h1>결제 및 매출</h1><p>서비스 수익 현황 분석</p></div>
+                    </div>
+                    <div class="kpi-cards">
+                        <div class="card kpi-card" style="--accent:#3b82f6;">
+                            <div class="kpi-top"><div class="kpi-icon"><i class="fa-solid fa-sack-dollar"></i></div><span class="kpi-trend neutral" style="font-size:0.72rem;"><i class="fa-solid fa-clock"></i> 집계 예정</span></div>
+                            <div class="kpi-value" style="font-size:1.1rem; color:var(--text-3);">데이터 없음</div>
+                            <div class="kpi-label">누적 매출 (미집계)</div>
+                        </div>
+                        <div class="card kpi-card" style="--accent:#10b981;">
+                            <div class="kpi-top"><div class="kpi-icon" style="background:rgba(16,185,129,.15);color:#10b981;"><i class="fa-solid fa-receipt"></i></div><span class="kpi-trend neutral" style="font-size:0.72rem;"><i class="fa-solid fa-clock"></i> 집계 예정</span></div>
+                            <div class="kpi-value" style="font-size:1.1rem; color:var(--text-3);">데이터 없음</div>
+                            <div class="kpi-label">결제 완료 건수</div>
+                        </div>
+                        <div class="card kpi-card" style="--accent:#f59e0b;">
+                            <div class="kpi-top"><div class="kpi-icon" style="background:rgba(245,158,11,.15);color:#f59e0b;"><i class="fa-solid fa-hourglass-half"></i></div></div>
+                            <div class="kpi-value" style="font-size:1.1rem; color:var(--text-3);">업데이트 예정</div>
+                            <div class="kpi-label">진행 중 (미수금)</div>
+                        </div>
+                        <div class="card kpi-card" style="--accent:#8b5cf6;">
+                            <div class="kpi-top"><div class="kpi-icon" style="background:rgba(139,92,246,.15);color:#8b5cf6;"><i class="fa-solid fa-user-tag"></i></div></div>
+                            <div class="kpi-value" style="font-size:1.1rem; color:var(--text-3);">업데이트 예정</div>
+                            <div class="kpi-label">평균 객단가 (추정)</div>
+                        </div>
+                    </div>
+                    <div class="card chart-card" style="margin-top:24px;">
+                        <div class="card-header">
+                            <div>
+                                <h3>월별 매출 추이 (Bar Chart)</h3>
+                                <p class="card-sub">결제 시스템 연동 후 실시간 집계 데이터가 표시됩니다.</p>
+                            </div>
+                        </div>
+                        <div class="chart-container" style="height:300px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px;">
+                            <i class="fa-solid fa-money-check-dollar" style="font-size:3rem; color:var(--text-3);"></i>
+                            <p style="color:var(--text-3); font-size:0.9rem;">매출 데이터 없음 — 정산 처리 대기 중</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ PAGE: REPORTS ============ -->
+            <div class="page-content" id="page-reports">
+                <div class="dashboard-wrapper">
+                    <div class="page-title-row">
+                        <div><h1>리포트 관리</h1><p>발행된 학생 맞춤 웹 리포트 현황</p></div>
+                    </div>
+                    <div class="report-grid" id="reportGrid">
+                        <!-- JS로 렌더링 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ PAGE: SETTINGS ============ -->
+            <div class="page-content" id="page-settings">
+                <div class="dashboard-wrapper">
+                    <div class="page-title-row">
+                        <div><h1>환경 설정</h1><p>PS:LAB 관리자 설정</p></div>
+                    </div>
+                    <div class="card" style="padding:32px; max-width:600px;">
+                        <h3 style="margin-bottom:20px;">기본 정보</h3>
+                        <div class="setting-row">
+                            <label>브랜드 이름</label>
+                            <input type="text" class="setting-input" value="PS:LAB">
+                        </div>
+                        <div class="setting-row">
+                            <label>관리자 이름</label>
+                            <input type="text" class="setting-input" value="최고 관리자">
+                        </div>
+                        <div class="setting-row">
+                            <label>연락처 (카카오 오픈채팅)</label>
+                            <input type="text" class="setting-input" placeholder="카카오 링크를 입력하세요">
+                        </div>
+                        <div class="setting-row">
+                            <label>기본 컨설팅 단가</label>
+                            <input type="text" class="setting-input" value="1,500,000">
+                        </div>
+                        <button class="btn-primary" style="margin-top:24px;">저장하기</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Student Detail Modal -->
+    <div class="modal-overlay" id="studentModal">
+        <div class="modal-box" style="max-width: 680px;">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <div class="modal-avatar" id="modalAvatar"></div>
+                    <div>
+                        <h2 id="modalName"></h2>
+                        <span id="modalSchool"></span>
+                    </div>
+                </div>
+                <button class="modal-close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info-grid">
+                    <div class="modal-info-item">
+                        <span class="info-label">지망 계열</span>
+                        <span class="info-value" id="modalMajor"></span>
+                    </div>
+                    <div class="modal-info-item">
+                        <span class="info-label">컨설팅 상태</span>
+                        <span class="info-value" id="modalStatus"></span>
+                    </div>
+                    <div class="modal-info-item">
+                        <span class="info-label">리포트 링크</span>
+                        <span class="info-value" id="modalReport"></span>
+                    </div>
+                    <div class="modal-info-item">
+                        <span class="info-label">등록일</span>
+                        <span class="info-value" id="modalDate"></span>
+                    </div>
+                </div>
+
+                <!-- GPA Mini Chart -->
+                <div class="modal-chart-wrap">
+                    <div class="modal-chart-label">📈 학기별 내신 추이</div>
+                    <div style="height: 120px; position:relative;">
+                        <canvas id="modalGpaChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Extended Data (filled by JS) -->
+                <div id="modalExtended" class="modal-extended"></div>
+
+                <div class="modal-note">
+                    <div class="modal-note-label"><i class="fa-solid fa-note-sticky"></i> 메모</div>
+                    <textarea class="modal-textarea" id="modalNote" placeholder="이 학생에 대한 메모를 입력하세요..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-outline" id="modalClose2">닫기</button>
+                <button class="btn-primary">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="admin-script.js"></script>
+</body>
+</html>
